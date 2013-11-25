@@ -47,16 +47,18 @@
 		
 	}
 	elseif($idTipo==2){
-		$query="SELECT * FROM bardas b
+		$query="SELECT Foto, nombre_ciudad, b.Clave, Medidas, c.nombre FROM campanas c join bardas b on
+		b.idcampanas = c.idcampanas
 		join ciudades cd on
 		cd.idciudad=b.idciudades
-		where b.idBarda=" . $idEsp." and activo = 1";
+		where b.idBarda=" . $idEsp." and b.activo = 1";
 		//echo $query;
 		$res = $oMySQL->ExecuteSQL($query);
 		echo "<img src='".$res["Foto"]."' style='width:100%;height:90%;'>";
 		echo "Ciudad: ".$res["nombre_ciudad"].".		";
 		echo "Clave: ".$res["Clave"].".		";
-		echo "Medidad: ".$res["Medidas"].".</br>"; 
+		echo "Medidad: ".$res["Medidas"].".</br>";
+		echo "Campana: ".$res["nombre"].".</br>"; 
 	}
 	
 

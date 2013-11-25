@@ -33,7 +33,7 @@
       classes: '',
       checkAllText: 'Marcar todo',
       uncheckAllText: 'Desmarcar todo',
-      noneSelectedText: 'Selecciona los Estados',
+      noneSelectedText: 'Seleccionar',
       selectedText: '# seleccionado(s)',
       selectedList: 0,
       show: null,

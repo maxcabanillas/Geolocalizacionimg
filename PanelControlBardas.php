@@ -1,8 +1,8 @@
-
 <?php 
-  include_once('clases/funciones.php');
-  $intConsecutivo=1; 
-  ?>
+	include ("seguridad.php");
+	include_once('clases/funciones.php');
+	$intConsecutivo=1; 
+?>
 <html lang="es">
 <head>
 	<title></title>
@@ -10,6 +10,7 @@
 
 <link rel="stylesheet" href="fancybox/source/jquery.fancybox.css?v=2.1.4" type="text/css" media="screen" />
 <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/form.css" type="text/css" media="screen" />
 <link rel="stylesheet" type="text/css" href="js/multi/jquery.multiselect.css" />
 <link rel="stylesheet" type="text/css" href="js/multi/demos/assets/style.css" />
 <link rel="stylesheet" type="text/css" href="js/multi/demos/assets/prettify.css" />
@@ -25,8 +26,10 @@
 <script type="text/javascript" src="js/multi/demos/assets/prettify.js"></script>
 <script type="text/javascript" src="js/multi/src/jquery.multiselect.js"></script>
 <script type="text/javascript" src="js/ajax.js"></script>
+<script type="text/javascript" src="js/customselect/jquery.customSelect.js"></script>
 <script type="text/javascript">
 $(function(){
+	$('.styled').customSelect();
 	$("#Municipios").multiselect();
 	$("#campanas").multiselect();
 	$( "#fecha_ini" ).datepicker();
@@ -45,23 +48,38 @@ $(function(){
           });
 </script>
 <body>
+	<div id="cabeza"><img src='img/logo.png' id="logo">
+	<img src='img/logo2.png' id="logo2"></div>
 	<header>
-    <h1>Panel de control</h1>
+    <h1>Panel de control bardas</h1>
     </header> 
     <form action="index.php" id="nuevo" method="post">
-	<p>Nombre Campaña:<input id="campana" name="campana" type="text" value =""/>  
+	<div class="wrapper" id="wrapper"> 
+				<span id="User">Bienvenido <?php echo $_SESSION["user"]; ?>.</span>
+				<span id="sesion"><a href="index.php?sesion=cerrar">Cerrar Sesi&oacute;n.</a></span> 
+	<div class="search" id="search">  
+	<p><span class="label">Nombre Campa&ntilde;a:</span><input id="campana" name="campana" type="text" value ="" class="text"/>  
                   <a onclick="AgregarCampana();">  <input id="savecampana" type="button" value ="Guardar" /> </a>
-					</p><br>
-	<div class="search" id="search">    	
+					</p><br>  	
                      <?php include("bardas.php"); ?>
+		 <p><span class="label">Bardas: </span><select name='Bardas' id='Bardas' class="styled">
+        <?php  foreach (getBardas() as $ObjEsp) : ?>
+            <option value="<?php echo $ObjEsp["idBarda"]; ?>"><?php echo $ObjEsp["nombre_ciudad"]." - ".$ObjEsp["Clave"]; ?></option>                        
+        <?php 
+        endforeach; ?>
+        </select></p>
+		<br>
+        <input id="tipo" type="hidden" value ="bardas" />
+        <input id="guardar" type="submit" value ="Guardar" />
                     <div class="clear"></div>
-        </div>   
+        </div>
+			 </div>
     </form>
 
-    <div id="marcas" style="width: 40%; height: 80%; float: left;"></div>     
+    <div id="footer" class="footer">
+	Guanajuato Gobierno del Estado Paseo de la presa #117, Zona Centro C.P. 36000
+	</div>     
     
-    <div id="map" style="width: 60%; height: 80%; float:right;"></div>
-
     <!-- Jquery -->
 
 

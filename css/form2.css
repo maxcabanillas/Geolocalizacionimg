@@ -1,0 +1,20 @@
+span.customSelect {
+	font-size:11px;
+	background-color: #f5f0de;
+	color:#6B7994;
+	padding:5px 7px;
+	border:0.1px solid #e7dab0;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px 2px;
+	width:100px;
+	text-align:left;
+	height:12px;
+	font-weight:bold;
+}
+span.customSelect.changed {
+	background-color: #f0dea4;
+}
+.customSelectInner {
+	background:url(../img/arrow.gif) no-repeat center right;
+}

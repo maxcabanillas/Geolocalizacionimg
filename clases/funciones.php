@@ -67,10 +67,14 @@ function getCampanasDay($id){
   	 return  $oMySQL->arrayedResult;
 }
 
-function getProveedores(){	 
+function getCampanasAct($id){	 
 	 global $BD,$USER,$PWD,$SERVER;
 	 $oMySQL = new MySQL(BASE, USUARIO, CLAVE,SERVIDOR);
-	 $query="SELECT * FROM localizacion.tbl_proveedores";
+	 $query="SELECT * FROM espectaculares es join espectaculares_vigencia esv on
+				esv.idespectaculares = es.idespectacular join vigencia v on
+				v.idvigencia = esv.idvigencia join campanas c on
+				c.idcampanas = v.idcampana
+	 where es.idespectacular = ".$id."";
   	 $res =  $oMySQL->ExecuteSQL($query);  	 
   	 return  $oMySQL->arrayedResult;
 }
@@ -111,6 +115,17 @@ function getDetalles($pIntTipo, $pIntAnuncioID){
 	global $BD,$USER,$PWD,$SERVER;
 	$oMySQL = new MySQL(BASE, USUARIO, CLAVE,SERVIDOR);
     $query="SELECT * FROM tbl_ciudades";
+}
+function Salir(){ 
+	if (ini_get("session.use_cookies")) {
+		$params = session_get_cookie_params();
+		setcookie(session_name(), '', time() - 42000,
+			$params["path"], $params["domain"],
+			$params["secure"], $params["httponly"]
+		);
+	}
+	session_destroy();
+	header("Location:index.php");
 }
 
 

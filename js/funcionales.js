@@ -1,31 +1,15 @@
 
-var map =null;
-var infoWindow=null;
-var markers = [];
+ function Radio(){
+	$(":radio:eq(0)").click(function(){
+        $("#fechas").hide(1000);
+    });
+    $(":radio:eq(1)").click(function(){
+        $("#fechas").show(1000);
+    });
+ }
 
-$(document).ready(function(){ 	  
-
-		$(":radio:eq(0)").click(function(){
-             $("#fechas").hide(1000);
-          });
-
-          $(":radio:eq(1)").click(function(){
-             $("#fechas").show(1000);
-          });
-        /* FancyBox */
-        $(".fancybox").fancybox();	
-        $(".abrirDetalles").fancybox({
-            maxWidth  : 800,
-            maxHeight : 600,
-            fitToView : false,
-            width   : '70%',
-            height    : '70%',
-            autoSize  : false,
-            closeClick  : false,
-            openEffect  : 'none',
-            closeEffect : 'none'
-        }); 
-			$.datepicker.regional['es'] = {
+ function Callendar(){
+	$.datepicker.regional['es'] = {
 			closeText: 'Cerrar',
 			prevText: 'Anterior',
 			nextText: 'Siguiente',
@@ -45,8 +29,46 @@ $(document).ready(function(){
 			yearSuffix: ''
 			};
 			$.datepicker.setDefaults($.datepicker.regional['es']);
+ }
+ 
+ function Select(){
+	$('.styled').customSelect();
+	$("#Municipios").multiselect();
+	$("#campanas").multiselect();
+	//$( ".fechas" ).hide();
+};
+
+function Dias(){
+	$( "#fecha_ini" ).datepicker();
+	$( "#fecha_fin" ).datepicker();
+}
+ 
+var map =null;
+var infoWindow=null;
+var markers = [];
+
+$(document).ready(function(){ 	  
+
+		Radio();
+		Callendar();
+		Select();
+		Dias();
+        /* FancyBox */
+        $(".fancybox").fancybox();	
+        $(".abrirDetalles").fancybox({
+            maxWidth  : 800,
+            maxHeight : 600,
+            fitToView : false,
+            width   : '70%',
+            height    : '70%',
+            autoSize  : false,
+            closeClick  : false,
+            openEffect  : 'none',
+            closeEffect : 'none'
+        }); 
+			
         /* Obtención de datos formulario */
-        $('#search').bind('click',function(){   
+        $('#busca').bind('click',function(){   
             var strTipo = $('#tipo').val();    
             /* var strLat = $('#municipio option:selected').attr('lat'); */
             /* var strLon = $('#municipio option:selected').attr('long');    */
@@ -101,7 +123,8 @@ function Load(plat,plong,acercamiento){
         mapTypeId: 'hybrid'
      });
  }
-
+ 
+ 
 function ParseJson(data){
   $.each(data, function(key, val) {
   });
